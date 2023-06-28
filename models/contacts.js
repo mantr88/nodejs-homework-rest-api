@@ -1,5 +1,6 @@
 const fs = require("fs/promises");
 const path = require("path");
+const crypto = require("crypto");
 
 const contactsPath = path.join(__dirname, "./contacts.json");
 
@@ -24,7 +25,17 @@ const getContactById = async (contactId) => {
 
 const removeContact = async (contactId) => {};
 
-const addContact = async (body) => {};
+const addContact = async (body) => {
+  try {
+    const items = await listContacts();
+    const newContact = { id: crypto.randomUUID(), ...body };
+    items.push(newContact);
+    await fs.writeFile(contactsPath, JSON.stringify(items, null, 2));
+    return newContact;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 const updateContact = async (contactId, body) => {};
 
