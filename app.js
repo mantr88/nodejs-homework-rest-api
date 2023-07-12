@@ -1,4 +1,5 @@
-// зупинився на перевірці унікальності пошти
+// зупинився на перевірці email тa password при логінізації
+// 1. Переробити помилки с catch в контроллерах auth
 
 const express = require("express");
 const logger = require("morgan");
