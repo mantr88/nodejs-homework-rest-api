@@ -1,5 +1,5 @@
 const { addSchema, updateFavorite } = require("./contactsShema");
-const authSchema = require("./authShema.js");
+const authSchema = require("./authSchema");
 
 module.exports = {
   addSchema,
