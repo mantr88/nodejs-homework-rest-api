@@ -4,5 +4,6 @@ const authSchema = require("./authSchema");
 module.exports = {
   addSchema,
   updateFavorite,
-  authSchema,
 };
+
+module.exports = authSchema;

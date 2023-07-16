@@ -1,5 +1,9 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 const User = require("../../models/users/index");
+
+const SECRET_KEY = process.env.SECRET_KEY;
 
 const login = async (req, res) => {
   try {
@@ -15,8 +19,9 @@ const login = async (req, res) => {
     if (!passwordCompare) {
       return res.status(401).json({ message: "Email or password is wrong" });
     }
-    const token = "jkhdvsgaviuebwshiueshviuuihreu";
-    res.json({
+    const payload = { id: user._id };
+    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
+    res.status(200).json({
       token,
       user: {
         email: user.email,

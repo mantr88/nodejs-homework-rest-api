@@ -6,10 +6,10 @@ const logger = require("morgan");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
+dotenv.config();
+
 const authRouter = require("./routes/api/auth");
 const contactsRouter = require("./routes/api/contacts");
-
-dotenv.config();
 
 require("./db");
 
@@ -33,8 +33,8 @@ app.use((req, res) => {
 });
 
 app.use((err, req, res, next) => {
-  const { status = 500, message = "Server error" } = err;
-  res.status(status).json({ message });
+  // const { status = 500, message = "Server error" } = err;
+  res.status(500).json({ message: err.message, stack: err.stack });
 });
 
 module.exports = app;
