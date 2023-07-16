@@ -10,7 +10,7 @@ router.get("/", authenticate, controller.getAll);
 
 router.get("/:contactId", authenticate, controller.getContactById);
 
-router.post("/", authenticate, validateBody(addSchema), controller.addContact);
+router.post("/", authenticate, controller.addContact);
 
 router.delete("/:contactId", authenticate, controller.deleteContact);
 

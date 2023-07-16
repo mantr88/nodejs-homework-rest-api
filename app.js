@@ -1,5 +1,7 @@
-// зупинився на перевірці email тa password при логінізації
+// зупинився на Оновлення підписки
 // 1. Переробити помилки с catch в контроллерах auth
+// 2. прибрав valedateBody в роуті додавання контакту;
+// 3. Оновлення підписки
 
 const express = require("express");
 const logger = require("morgan");
