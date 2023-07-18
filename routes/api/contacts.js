@@ -5,12 +5,13 @@ const controller = require("../../controllers/contacts/index");
 const { validateBody, authenticate } = require("../../middlewares/index");
 
 const { addSchema, updateFavorite } = require("../../schemas/index");
+// const updateFavorite = require("../../schemas/updateFavorite");
 
 router.get("/", authenticate, controller.getAll);
 
 router.get("/:contactId", authenticate, controller.getContactById);
 
-router.post("/", authenticate, controller.addContact);
+router.post("/", authenticate, validateBody(addSchema), controller.addContact);
 
 router.delete("/:contactId", authenticate, controller.deleteContact);
 

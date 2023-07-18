@@ -2,7 +2,7 @@ const express = require("express");
 
 const { validateBody, authenticate } = require("../../middlewares/index");
 
-const authSchema = require("../../schemas/index");
+const { authSchema } = require("../../schemas/index");
 
 const controller = require("../../controllers/auth/index");
 
@@ -19,4 +19,8 @@ router.get("/current", authenticate, controller.getCurrent);
 
 // logout
 router.post("/logout", authenticate, controller.logout);
+
+// update subscription
+router.patch("/", authenticate, controller.updateSubscription);
+
 module.exports = router;
