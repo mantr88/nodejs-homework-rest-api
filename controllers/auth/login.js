@@ -5,7 +5,7 @@ const User = require("../../models/users/index");
 
 const SECRET_KEY = process.env.SECRET_KEY;
 
-const login = async (req, res) => {
+const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -32,7 +32,7 @@ const login = async (req, res) => {
       },
     });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 

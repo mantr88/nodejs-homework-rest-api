@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt");
 
 const User = require("../../models/users/index");
 
-const register = async (req, res) => {
+const register = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
@@ -17,7 +17,7 @@ const register = async (req, res) => {
       .status(201)
       .json({ email: newUser.email, subscription: "starter" });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 

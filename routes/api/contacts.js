@@ -5,7 +5,6 @@ const controller = require("../../controllers/contacts/index");
 const { validateBody, authenticate } = require("../../middlewares/index");
 
 const { addSchema, updateFavorite } = require("../../schemas/index");
-// const updateFavorite = require("../../schemas/updateFavorite");
 
 router.get("/", authenticate, controller.getAll);
 
