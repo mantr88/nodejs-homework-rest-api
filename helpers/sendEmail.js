@@ -11,15 +11,15 @@ const transport = nodemailer.createTransport({
   },
 });
 
-const message = {
-  to: "padre12@gmail.com",
-  from: "andrey@gmail.com",
-  subject: "From Node.js with love",
-  html: "<p>Node.js awesome platform</p>",
-  text: "Node.js awesome platform",
+const sendEmail = async (data) => {
+  try {
+    const email = { ...data, from: "anton@mail.com" };
+    await transport
+      .sendMail(email)
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
+    return true;
+  } catch (error) {}
 };
 
-transport
-  .sendMail(message)
-  .then((res) => console.log(res))
-  .catch((error) => console.log(error));
+module.exports = sendEmail;
