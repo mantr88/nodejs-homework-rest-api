@@ -8,6 +8,8 @@ dotenv.config();
 const authRouter = require("./routes/api/auth");
 const contactsRouter = require("./routes/api/contacts");
 
+const { errorHandler, notFoundError } = require("./middlewares/index");
+
 require("./db");
 
 const app = express();
@@ -26,12 +28,15 @@ app.use(express.static("public"));
 app.use("/api/users", authRouter);
 app.use("/api/contacts", contactsRouter);
 
-app.use((req, res) => {
-  res.status(404).json({ message: "Not found" });
-});
+// app.use((req, res) => {
+//   res.status(404).json({ message: "Not found" });
+// });
 
-app.use((err, req, res, next) => {
-  res.status(500).json({ message: err.message, stack: err.stack });
-});
+// app.use((err, req, res, next) => {
+//   res.status(500).json({ message: err.message, stack: err.stack });
+// });
+app.use("*", notFoundError);
+
+app.use(errorHandler);
 
 module.exports = app;
