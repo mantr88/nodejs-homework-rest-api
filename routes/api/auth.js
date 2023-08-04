@@ -6,7 +6,11 @@ const {
   upload,
 } = require("../../middlewares/index");
 
-const { authSchema, updateSubscription } = require("../../schemas/index");
+const {
+  authSchema,
+  updateSubscription,
+  emailSchema,
+} = require("../../schemas/index");
 
 const controller = require("../../controllers/auth/index");
 
@@ -39,5 +43,10 @@ router.patch(
   upload.single("avatar"),
   controller.uploadAvatar
 );
+
+// verifying email
+router.get("/verify/:verificationToken", controller.verifyEmail);
+
+router.post("/verify", validateBody(emailSchema), controller.resendVerifyEmail);
 
 module.exports = router;
