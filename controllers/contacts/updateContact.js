@@ -1,23 +1,21 @@
+const asyncHandler = require("express-async-handler");
 const Contact = require("../../models/contacts/index");
 
-const updateContact = async (req, res, next) => {
+const updateContact = asyncHandler(async (req, res, next) => {
   const { contactId } = req.params;
   const contact = {
     name: req.body.name,
     email: req.body.email,
     phone: req.body.phone,
   };
-  try {
-    const result = await Contact.findByIdAndUpdate(contactId, contact, {
-      new: true,
-    });
-    if (!result) {
-      return res.status(404).json({ message: "Not found" });
-    }
-    return res.status(200).json(result);
-  } catch (error) {
-    next(error);
+  const result = await Contact.findByIdAndUpdate(contactId, contact, {
+    new: true,
+  });
+  if (!result) {
+    res.status(404);
+    throw new Error("Not found");
   }
-};
+  return res.status(200).json(result);
+});
 
 module.exports = updateContact;

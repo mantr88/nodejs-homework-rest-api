@@ -1,3 +1,7 @@
+// =========== Необхідно доробити ==============
+// 1. Не вірно працює express - async - handler коли вводимо Id
+// з меньшою кількістю знаків ніж в правильному Id. Видає помилку 200 замість
+// тієї, яку ми прокидуємо. В deleteContact, getContactById, updateContact, updateFavorite
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
